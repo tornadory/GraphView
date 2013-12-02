@@ -1,19 +1,16 @@
 /**
  * This file is part of GraphView.
- *
- * GraphView is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * GraphView is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with GraphView.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
- *
+ * 
+ * GraphView is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ * 
+ * GraphView is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with GraphView. If not, see
+ * <http://www.gnu.org/licenses/lgpl.html>.
+ * 
  * Copyright Jonas Gehring
  */
 
@@ -23,12 +20,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
+import android.graphics.Typeface;
 import android.view.ContextThemeWrapper;
 
 /**
- * Styles for the GraphView
- * Important: Use GraphViewSeries.GraphViewSeriesStyle for series-specify styling
- *
+ * Styles for the GraphView Important: Use GraphViewSeries.GraphViewSeriesStyle for series-specify styling
+ * 
  */
 public class GraphViewStyle {
 	private int verticalLabelsColor;
@@ -42,6 +39,7 @@ public class GraphViewStyle {
 	private int legendBorder;
 	private int legendSpacing;
 	private Align verticalLabelsAlign;
+	private Typeface typeface;
 
 	public GraphViewStyle() {
 		setDefaults();
@@ -130,14 +128,16 @@ public class GraphViewStyle {
 	}
 
 	/**
-	 * @param numHorizontalLabels 0 = auto
+	 * @param numHorizontalLabels
+	 *            0 = auto
 	 */
 	public void setNumHorizontalLabels(int numHorizontalLabels) {
 		this.numHorizontalLabels = numHorizontalLabels;
 	}
 
 	/**
-	 * @param numVerticalLabels 0 = auto
+	 * @param numVerticalLabels
+	 *            0 = auto
 	 */
 	public void setNumVerticalLabels(int numVerticalLabels) {
 		this.numVerticalLabels = numVerticalLabels;
@@ -156,7 +156,8 @@ public class GraphViewStyle {
 	}
 
 	/**
-	 * @param verticalLabelsWidth 0 = auto
+	 * @param verticalLabelsWidth
+	 *            0 = auto
 	 */
 	public void setVerticalLabelsWidth(int verticalLabelsWidth) {
 		this.verticalLabelsWidth = verticalLabelsWidth;
@@ -164,16 +165,27 @@ public class GraphViewStyle {
 
 	/**
 	 * tries to get the theme's font color and use it for labels
-	 * @param context must be instance of ContextThemeWrapper
+	 * 
+	 * @param context
+	 *            must be instance of ContextThemeWrapper
 	 */
 	public void useTextColorFromTheme(Context context) {
 		if (context instanceof ContextThemeWrapper) {
-			TypedArray array = ((ContextThemeWrapper) context).getTheme().obtainStyledAttributes(new int[] {android.R.attr.textColorPrimary});
+			TypedArray array = ((ContextThemeWrapper) context).getTheme().obtainStyledAttributes(
+					new int[] { android.R.attr.textColorPrimary });
 			int color = array.getColor(0, getVerticalLabelsColor());
 			array.recycle();
 
 			setVerticalLabelsColor(color);
 			setHorizontalLabelsColor(color);
 		}
+	}
+
+	public Typeface getTypeface() {
+		return typeface;
+	}
+
+	public void setTypeface(Typeface typeface) {
+		this.typeface = typeface;
 	}
 }

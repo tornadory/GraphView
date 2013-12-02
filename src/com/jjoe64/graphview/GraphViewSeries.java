@@ -32,15 +32,17 @@ public class GraphViewSeries {
 	 */
 	static public class GraphViewSeriesStyle {
 		public int color = 0xff0077cc;
+		public int textColor = 0xffff0000;
 		public int thickness = 3;
 		private ValueDependentColor valueDependentColor;
 
 		public GraphViewSeriesStyle() {
 			super();
 		}
-		public GraphViewSeriesStyle(int color, int thickness) {
+		public GraphViewSeriesStyle(int color, int textColor, int thickness) {
 			super();
 			this.color = color;
+			this.textColor = textColor;
 			this.thickness = thickness;
 		}
 		
