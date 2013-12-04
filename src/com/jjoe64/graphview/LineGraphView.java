@@ -25,6 +25,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
@@ -77,7 +78,7 @@ public class LineGraphView extends GraphView {
 		labelPaint.setTextAlign(Align.CENTER);
 		labelPaint.setTextSize(dataPointsRadius);
 
-		if (drawDataPoints) {
+		if (drawDataPoints && values.length > 1) {
 			horstart += dataPointsRadius;
 			graphwidth -= dataPointsRadius * 2 + style.thickness;
 		}
@@ -136,7 +137,11 @@ public class LineGraphView extends GraphView {
 
 		if (drawDataPoints) {
 			// Draw the very last point
-			drawDataPoint(canvas, labelPaint, values.length, lastUnmodEndX, lastUnmodEndY);
+			if (values.length == 1) {
+				drawDataPoint(canvas, labelPaint, values.length, graphwidth / 2, graphheight + border);
+			} else {
+				drawDataPoint(canvas, labelPaint, values.length, lastUnmodEndX, lastUnmodEndY);
+			}
 		}
 
 		if (bgPath != null) {
